@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Day for My Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Floating Hearts */
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hearts span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 0, 0, 0.6);
+            clip-path: polygon(50% 0%, 100% 35%, 82% 100%, 50% 70%, 18% 100%, 0% 35%);
+            animation: animate 5s linear infinite;
+            bottom: -150px;
+        }
+
+        .hearts span:nth-child(1) {
+            left: 25%;
+            animation-delay: 0s;
+        }
+
+        .hearts span:nth-child(2) {
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .hearts span:nth-child(3) {
+            left: 70%;
+            animation-delay: 4s;
+        }
+
+        .hearts span:nth-child(4) {
+            left: 50%;
+            animation-delay: 6s;
+        }
+
+        .hearts span:nth-child(5) {
+            left: 85%;
+            animation-delay: 8s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Container */
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        /* Teddy Bear */
+        .teddy-bear {
+            margin: 2rem 0;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+        }
+
+        .teddy-bear img {
+            width: 100%;
+            height: 100%;
+            animation: wave 2s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            75% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        /* Hidden Love Message */
+        .love-message {
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .love-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .love-message h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #e74c3c;
+            margin-bottom: 1rem;
+        }
+
+        .love-message p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #e74c3c;
+            margin-top: 1rem;
+        }
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Confetti Animation */
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #e74c3c;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation: confetti 5s linear infinite;
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(1000px) rotate(720deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .love-message h2 {
+                font-size: 1.5rem;
+            }
+
+            .love-message p {
+                font-size: 0.9rem;
+            }
+
+            .signature {
+                font-size: 1.2rem;
+            }
+
+            footer {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            .love-message h2 {
+                font-size: 1.3rem;
+            }
+
+            .love-message p {
+                font-size: 0.8rem;
+            }
+
+            .signature {
+                font-size: 1rem;
+            }
+
+            footer {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Hearts -->
+    <div class="hearts">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Confetti Animation -->
+    <div class="confetti" id="confetti"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header>
+            <h1>🌹 Happy Rose Day, Kuchipu! 🌹</h1>
+            <p>You are the most beautiful rose in my garden of life.</p>
+        </header>
+        <section class="teddy-bear" onclick="revealMessage()">
+            <img src="3.jpg" alt="Teddy Bear">
+        </section>
+        <section class="love-message" id="loveMessage">
+            <h2>To My Dearest Cookie,</h2>
+            <p id="typed-message"></p>
+            <p class="signature">Ozzu</p>
+        </section>
+
+    </div>
+
+    <!-- Background Music -->
+    <audio id="bg-music" autoplay loop>
+        <source src="romantic_ringtone.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Typing Effect
+        const message = "With every heartbeat, my soul whispers your name. Your love is the most precious treasure I have ever known, a gift that fills my world with warmth and endless joy. On this Rose Day, I want to remind you that you are my forever love, my most beautiful dream, and the keeper of my heart.....today and always. ❤️";
+        let i = 0;
+        const typingEffect = () => {
+            if (i < message.length) {
+                document.getElementById("typed-message").innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typingEffect, 50);
+            }
+        };
+       
+        // Reveal Love Message and Confetti
+        function revealMessage() {
+            const loveMessage = document.getElementById('loveMessage');
+            loveMessage.classList.add('show');
+            typingEffect();
+
+            // Confetti Effect
+            const confettiContainer = document.getElementById('confetti');
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti-piece');
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.animationDelay = `${Math.random() * 5}s`;
+                confettiContainer.appendChild(confetti);
+            }
+        }
+    </script>
+</body>
+</html>
