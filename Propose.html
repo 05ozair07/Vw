@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine Forever? 💍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+            transition: background 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            animation: fadeIn 2s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: 1.8rem;
+            animation: fadeIn 2.5s ease-in-out;
+            margin-top: 10px;
+        }
+
+        .ring-box {
+            margin-top: 2rem;
+            cursor: pointer;
+            width: 130px;
+            height: 130px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: glow 1.5s infinite alternate;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .ring-box:hover {
+            transform: scale(1.1);
+        }
+
+        .ring-box img {
+            width: 80px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .proposal-message {
+            display: none;
+            font-size: 2rem;
+            margin-top: 2rem;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #e74c3c;
+            border-radius: 15px;
+            animation: fadeIn 1.5s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .btn {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .yes-btn {
+            background: #28a745;
+            color: white;
+            border: 2px solid white; /* Added border */
+        }
+
+        .no-btn {
+            background: #dc3545;
+            color: white;
+            position: absolute;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .rose-petals, .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: none;
+        }
+
+        .petal, .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: pink;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall 5s infinite linear;
+        }
+
+        .heart {
+            background: #ff4d6d;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 50% 75%, 18% 100%, 0% 38%);
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .love-message {
+            display: none;
+            font-size: 1rem;
+            color: #ff4d6d;
+            margin-top: 2rem;
+            animation: heartbeat 1.5s infinite, glowText 2s infinite alternate;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.9); /* Added background */
+            padding: 20px; /* Added padding */
+            border-radius: 15px; /* Added border radius */
+            border: 2px solid #ff4d6d; /* Added border */
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.7); }
+            100% { box-shadow: 0 0 20px rgba(255, 255, 255, 1); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes glowText {
+            0% { text-shadow: 0 0 5px #ff4d6d, 0 0 10px #ff4d6d; }
+            100% { text-shadow: 0 0 20px #ff4d6d, 0 0 30px #ff4d6d; }
+        }
+
+        /* Funny Message Popup */
+        .funny-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .funny-message p {
+            font-size: 1.5rem;
+            color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            p {
+                font-size: 1.5rem;
+            }
+
+            .ring-box {
+                width: 100px;
+                height: 100px;
+            }
+
+            .ring-box img {
+                width: 60px;
+            }
+
+            .proposal-message {
+                font-size: 1.5rem;
+                padding: 15px;
+            }
+
+            .btn {
+                font-size: 1.2rem;
+                padding: 8px 16px;
+            }
+
+            .love-message {
+                font-size: 1rem;
+            }
+
+            .funny-message p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>💖 Happy Propose Day Cookie! 💖</h1>
+    <p>Click the ring box for a surprise! 💍</p>
+    <div class="ring-box" onclick="revealProposal()">
+        <img src="4.jpg" alt="Ring Box">
+    </div>
+    <div class="proposal-message" id="proposalMessage">
+        My dearest cookie, you are my everything. Will you make me the happiest person and will be my valentine (Future Wifey)? 💍💕
+    </div>
+    <div class="buttons" id="buttons">
+        <button class="btn yes-btn" onclick="showCelebration()">Yes! 💖</button>
+        <button class="btn no-btn" id="noBtn">No 🥺</button>
+    </div>
+    <div class="rose-petals" id="rosePetals"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="love-message" id="loveMessage">Yay! You’ve just made me the happiest person in the world! 🌟<br><br>
+        Now, let’s write our forever story together, one beautiful chapter at a time. I love you to the moon and back, my Kuchipu! 💖✨</div>
+    <div class="funny-message" id="funnyMessage">
+        <p id="funnyText"></p>
+    </div>
+    <audio id="loveSong" src="love_tune.mp3" loop></audio>
+    
+    <script>
+        const funnyMessages = [
+            "Nice try! 😜",
+            "You can't escape! 🏃‍♂️",
+            "Click Yes already! 😘",
+            "I'm not giving up! 💪",
+            "You're stuck with me! ❤️",
+            "Just say Yes! 😍"
+        ];
+
+        function revealProposal() {
+            document.getElementById("proposalMessage").style.display = "block";
+            document.getElementById("buttons").style.display = "block";
+            document.getElementById("loveSong").play();
+        }
+
+        function showCelebration() {
+            document.getElementById("loveMessage").style.display = "block";
+            document.getElementById("noBtn").remove();
+            document.body.style.background = "linear-gradient(45deg, #ff4d6d, #ff758c, #ffb3c1)";
+            createPetals();
+            createHearts();
+            document.getElementById("buttons").style.display = "none";
+        }
+
+        function createPetals() {
+            const petalsContainer = document.getElementById("rosePetals");
+            petalsContainer.style.display = "block";
+            for (let i = 0; i < 30; i++) {
+                const petal = document.createElement("div");
+                petal.classList.add("petal");
+                petal.style.left = Math.random() * 100 + "%";
+                petal.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                petalsContainer.appendChild(petal);
+                setTimeout(() => petal.remove(), 10000);
+            }
+        }
+
+        function createHearts() {
+            const heartsContainer = document.getElementById("floatingHearts");
+            heartsContainer.style.display = "block";
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "%";
+                heart.style.animationDuration = (Math.random() * 4 + 2) + "s";
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 10000);
+            }
+        }
+
+        // Move the "No" button randomly and show funny messages
+        const noBtn = document.getElementById("noBtn");
+        noBtn.addEventListener("click", () => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = "absolute";
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+
+            const randomMessage = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+            document.getElementById("funnyText").innerText = randomMessage;
+            document.getElementById("funnyMessage").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("funnyMessage").style.display = "none";
+            }, 2000); // Hide the message after 2 seconds
+        });
+    </script>
+</body>
+</html>
