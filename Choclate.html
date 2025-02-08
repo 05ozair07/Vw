@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍫 Unbox and Eat Chocolate 💖</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Pacifico', cursive, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #5d3a00;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+      max-width: 90%;
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ff6f61;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #5d3a00;
+    }
+
+    .slider-container {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 15px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      outline: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    .slider:hover {
+      opacity: 1;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      background: #ff6f61;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .slider::-moz-range-thumb {
+      width: 25px;
+      height: 25px;
+      background: #ff6f61;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .slider::-moz-range-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .chocolate {
+      font-size: 5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: none;
+      animation: bounce 2s infinite, glow 2s infinite alternate;
+    }
+
+    .chocolate:hover {
+      transform: scale(1.2);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 20px;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .progress {
+      height: 100%;
+      background-color: #ff6f61;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #biteMessage {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: #ff6f61;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    #surpriseMessage {
+      font-size: 1.8rem;
+      margin-top: 20px;
+      color: #ff6f61;
+      animation: heartBeat 1.5s infinite, glow 2s infinite alternate;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes unbox {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes progressGrow {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes glow {
+      0% { filter: drop-shadow(0 0 5px #ff6f61); }
+      100% { filter: drop-shadow(0 0 20px #ff6f61); }
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(-100vh) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+
+      .chocolate {
+        font-size: 4rem;
+      }
+
+      #biteMessage, #surpriseMessage {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .chocolate {
+        font-size: 3rem;
+      }
+
+      #biteMessage, #surpriseMessage {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>🍫 Lets unbox and eat  💖</h1>
+    <p id="unboxMessage">Slide to unbox the chocolate!</p>
+    <div class="slider-container">
+      <input type="range" min="0" max="100" value="0" class="slider" id="slider">
+    </div>
+    <div class="chocolate" id="chocolate">🍫</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <p id="biteMessage"></p>
+    <p id="surpriseMessage" class="hidden">I love you more than chocolate! 💕 Forever and always! 💖</p>
+  </div>
+  <audio id="loveSong" src="saudebazi_new.mp3" loop></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <script>
+    // Elements
+    const slider = document.getElementById('slider');
+    const chocolate = document.getElementById('chocolate');
+    const progressBar = document.getElementById('progress');
+    const biteMessage = document.getElementById('biteMessage');
+    const surpriseMessage = document.getElementById('surpriseMessage');
+    const unboxMessage = document.getElementById('unboxMessage');
+    let bitesRemaining = 5;
+    document.getElementById("loveSong").play();
+    
+    const biteMessages = [
+      "Yum! First bite! 🍫",
+      "Delicious! Second bite! 🍫",
+      "Mmm... Third bite! 🍫",
+      "Almost there! Fourth bite! 🍫",
+      "Last bite! 🍫"
+    ];
+
+    // Step 1: Unbox the chocolate
+    slider.addEventListener('input', () => {
+      if (slider.value >= 100) {
+        document.getElementById("loveSong").play();
+        slider.style.display = 'none';
+        unboxMessage.style.display = 'none';
+        chocolate.style.display = 'block';
+        chocolate.style.animation = 'unbox 1s ease-in-out, glow 2s infinite alternate';
+        biteMessage.textContent = "Click the chocolate to take a bite!";
+      }
+    });
+
+    // Step 2: Eat the chocolate
+    chocolate.addEventListener('click', () => {
+      if (bitesRemaining > 0) {
+        bitesRemaining--;
+        chocolate.style.transform = `scale(${1 - (5 - bitesRemaining) * 0.15})`;
+
+        progressBar.style.width = `${((5 - bitesRemaining) / 5) * 100}%`;
+        progressBar.style.animation = 'progressGrow 0.5s ease-in-out';
+
+        biteMessage.textContent = biteMessages[5 - bitesRemaining - 1];
+        biteMessage.style.animation = 'fadeIn 0.5s ease-in-out';
+
+        if (bitesRemaining === 0) {
+          chocolate.style.display = 'none';
+          surpriseMessage.classList.remove('hidden');
+          surpriseMessage.style.animation = 'heartBeat 1.5s infinite, glow 2s infinite alternate';
+
+          // Confetti explosion
+          confetti({
+            particleCount: 200,
+            spread: 100,
+            origin: { y: 0.6 },
+            colors: ['#ff6f61', '#ff9a9e', '#fad0c4', '#ffffff']
+          });
+
+          // Add falling hearts
+          for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.innerHTML = '💖';
+            heart.style.position = 'absolute';
+            heart.style.top = '-50px';
+            heart.style.left = `${Math.random() * 100}vw`;
+            heart.style.fontSize = `${Math.random() * 30 + 20}px`;
+            heart.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear infinite`;
+            document.body.appendChild(heart);
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
