@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Teddy Day Cookie🧸💖!!!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 500px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ff6f61;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    .gift-box {
+      width: 100px;
+      max-width: 100%;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gift-box:hover {
+      transform: scale(1.1);
+    }
+
+    .teddy-img {
+      width: 150px;
+      height: auto;
+      display: none;
+      margin: 20px auto;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .message {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 20px;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .options {
+      display: none;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .options button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-family: 'Pacifico', cursive;
+      border: none;
+      border-radius: 10px;
+      background: #ff6f61;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .options button:hover {
+      transform: scale(1.1);
+    }
+
+    .surprise-button {
+      display: none;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-family: 'Pacifico', cursive;
+      border: none;
+      border-radius: 10px;
+      background: #ff6f61;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .surprise-button:hover {
+      transform: scale(1.1);
+    }
+
+    .fullscreen-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 1000;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .fullscreen-popup h2 {
+      font-size: 2rem;
+      color: #ff6f61;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    .fullscreen-popup p {
+      font-size: 1.2rem;
+      color: #333;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6f61;
+      transform: rotate(-45deg);
+      animation: floatHearts 5s ease-in-out infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff6f61;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 10px;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes floatHearts {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-500px) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .gift-box {
+        width: 80px;
+      }
+
+      .teddy-img {
+        width: 120px;
+      }
+
+      .message {
+        font-size: 1rem;
+      }
+
+      .options button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      .surprise-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+
+      .fullscreen-popup h2 {
+        font-size: 1.5rem;
+      }
+
+      .fullscreen-popup p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .gift-box {
+        width: 60px;
+      }
+
+      .teddy-img {
+        width: 100px;
+      }
+
+      .message {
+        font-size: 0.9rem;
+      }
+
+      .options button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+
+      .surprise-button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+
+      .fullscreen-popup h2 {
+        font-size: 1.2rem;
+      }
+
+      .fullscreen-popup p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1>Happy Teddy Day Cookie! 🧸💖</h1>
+    <img src="gift-present.gif" alt="Gift Box" class="gift-box" onclick="openGift()">
+    <img src="bubududu-panda.gif" alt="Cute Teddy Bear" class="teddy-img">
+    <div id="teddyMessage" class="message"></div>
+    <div class="options" id="options">
+      <button onclick="handleYes()">Yes</button>
+      <button onclick="handleNo()">No</button>
+    </div>
+    <button class="surprise-button" id="surpriseButton" onclick="showSurprise()">Click for Surprise!</button>
+  </div>
+
+  <div class="fullscreen-popup" id="fullscreenPopup">
+    <div>
+      <h2>You’re My Everything! 💖</h2>
+      <p>
+        Ozzu loves you beyond what words can ever express. You’re the most precious part of his world, his happiest place, and his forever love. <br> He feels like the luckiest soul to have you by his side. Happy Teddy Day, my love! 🧸💖✨
+      </p>
+    </div>
+  </div>
+  <audio id="loveSong" src="ek_main_aur_ekk_tu.mp3" loop></audio>
+
+  <script>
+    function openGift() {
+        document.getElementById("loveSong").play();
+      document.querySelector('.gift-box').style.display = 'none';
+      document.querySelector('.teddy-img').style.display = 'block';
+      document.getElementById('teddyMessage').style.display = 'block';
+      document.getElementById('teddyMessage').textContent = "Hello, you must be Ozzu's cookie... right??";
+      document.getElementById('options').style.display = 'flex';
+    }
+
+    function handleYes() {
+      document.getElementById('teddyMessage').textContent = "I knew it! You’re the sweetest cookie in the world! 🍪💖";
+      document.getElementById('options').style.display = 'none';
+      document.getElementById('surpriseButton').style.display = 'block';
+      document.getElementById('teddyMessage').style.display = 'none'; // Hide the message
+    }
+
+    function handleNo() {
+      document.getElementById('teddyMessage').innerHTML = `
+        You are wrong! I can see you, the way Ozzu has described you, you look the same... 
+        <span style="color: #ff6f61;">so cute and adorable!</span> 😘
+      `;
+      document.getElementById('options').innerHTML = `
+        <button onclick="handleRight()">Am I right?</button>
+        <button onclick="handleWrong()">Am I wrong?</button>
+      `;
+    }
+
+    function handleRight() {
+      document.getElementById('teddyMessage').textContent = "I knew it! You’re the sweetest cookie in the world! 🍪💖";
+      document.getElementById('options').style.display = 'none';
+      document.getElementById('surpriseButton').style.display = 'block';
+      document.getElementById('teddyMessage').style.display = 'none'; // Hide the message
+    }
+
+    function handleWrong() {
+      document.getElementById('teddyMessage').innerHTML = `
+        Are you sure you're not Ozzu's Kuchipu? 🧐
+      `;
+      document.getElementById('options').innerHTML = `
+        <button onclick="callOzzu()">Yes, I am!</button>
+        <button onclick="handleYes()">No, I’m his kuchipu.</button>
+      `;
+    }
+
+    function callOzzu() {
+      document.getElementById('teddyMessage').innerHTML = `
+        Hmm... call Ozzu at <a href="tel:+918010906891" style="color: #ff6f61; text-decoration: none;">++91-8010906891</a> for clarification! 😉
+      `;
+      document.getElementById('options').style.display = 'none';
+    }
+
+    function showSurprise() {
+      document.getElementById('fullscreenPopup').style.display = 'flex';
+      createHearts();
+      setTimeout(() => {
+        document.getElementById('fullscreenPopup').style.display = 'none';
+      }, 4000); // Popup disappears after 5 seconds
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+  </script>
+</body>
+</html>
