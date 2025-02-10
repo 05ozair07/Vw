@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Day ❤️</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            max-width: 500px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+            animation: bounce 2s infinite;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            background: #ff4757;
+        }
+
+        .promises {
+            display: none;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .promise-slide {
+            display: none;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            border: 2px solid #ff6b6b;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .promise-slide.active {
+            display: block;
+            transform: scale(1.05);
+            box-shadow: 0 8px 32px rgba(255, 107, 107, 0.4);
+        }
+
+        .slider-buttons {
+            margin-top: 20px;
+        }
+
+        .slider-buttons button {
+            background: #ff6b6b;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .slider-buttons button:hover {
+            transform: scale(1.1);
+        }
+
+        .confirmation-message {
+            display: none;
+            font-size: 1rem;
+            margin-top: 20px;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .no-response {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .no-response img {
+            width: 100px;
+            height: 100px;
+            animation: bounce 2s infinite;
+        }
+
+        .no-response p {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #ff6b6b;
+        }
+
+        /* Background Animations */
+        .background-animations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hearts, .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hearts span, .sparkles span {
+            position: absolute;
+            display: block;
+            animation: animateHearts 10s linear infinite;
+        }
+
+        .hearts span {
+            width: 20px;
+            height: 20px;
+            background: #ff6b6b;
+            box-shadow: 0 0 10px #ff6b6b, 0 0 20px #ff6b6b, 0 0 40px #ff6b6b;
+            border-radius: 50%;
+        }
+
+        .sparkles span {
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #fff;
+            border-radius: 50%;
+            animation: animateSparkles 5s linear infinite;
+        }
+
+        @keyframes animateHearts {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes animateSparkles {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 0.9rem;
+            }
+
+            .promise-slide {
+                padding: 10px;
+            }
+
+            .button {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+
+            .no-response img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .confirmation-message {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.8rem;
+            }
+
+            .button {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .no-response img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .confirmation-message {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animations">
+        <div class="hearts">
+            <span style="left: 10%; animation-delay: 0s;"></span>
+            <span style="left: 20%; animation-delay: 2s;"></span>
+            <span style="left: 50%; animation-delay: 4s;"></span>
+            <span style="left: 70%; animation-delay: 6s;"></span>
+            <span style="left: 90%; animation-delay: 8s;"></span>
+        </div>
+        <div class="sparkles">
+            <span style="left: 5%; animation-delay: 1s;"></span>
+            <span style="left: 30%; animation-delay: 3s;"></span>
+            <span style="left: 60%; animation-delay: 5s;"></span>
+            <span style="left: 80%; animation-delay: 7s;"></span>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Promise Day ❤️</h1>
+        <p>I’m here to remind you of some sweet little promises that Ozzu has made just for you💖✨.....</p>
+        <button class="button" id="showPromisesButton">Show!</button>
+
+        <div class="promises" id="promises">
+            <div class="promise-slide active">
+                <p>1. I promise to always make you laugh, even when you’re trying your best to stay mad at me😜💕.</p> 
+            </div>
+            <div class="promise-slide">
+                <p>2. I promise to be your biggest cheerleader, your loudest fan, and your forever supporter🎉❤️.</p>
+            </div>
+            <div class="promise-slide">
+                <p>3. I promise to remind you every single day just how much I adore you—because my love for you only grows💖✨.</p>
+            </div>
+            <div class="promise-slide">
+                <p>4. I promise to always listen to you, even when my brain is buffering trying to understand😆🎧.</p> 
+            </div>
+            <div class="promise-slide">
+                <p>5. I promise to fill your days with sweet surprises and little moments that make your heart smile🎁🥰.</p> 
+            </div>
+            <div class="promise-slide">
+                <p>6. I promise to always be honest with you, because our love deserves nothing less than the truth💬💞.</p>
+            </div>
+            <div class="promise-slide">
+                <p>7. I promise to hold your hand through every storm and dance with you in every sunshine🌦️🤝💃.</p>
+            </div>
+            <div class="slider-buttons">
+                <button onclick="prevSlide()">⬅️</button>
+                <button onclick="nextSlide()">➡️</button>
+            </div>
+        </div>
+
+        <div id="promiseOption" style="display: none;">
+            <p>Want to make a little promise for him too💖🥰?</p>
+            <button class="button" onclick="showConfirmation()">Yes</button>
+            <button class="button" onclick="showNoResponse()">No</button>
+        </div>
+
+        <div class="confirmation-message" id="confirmationMessage">
+            Sending you to WhatsApp to sprinkle some love with your promises💌✨💕.......
+        </div>
+
+        <div class="no-response" id="noResponse">
+            <img src="corgi-dogs.gif" alt="Cute Puppy">
+            <p>Aww, no promises? That’s okay🥹💞!!</p>
+            <p>I’ll still be your forever-ever cookie🐻💕✨!!</p>
+        </div>
+    </div>
+
+    <script>
+        // Show promises on button click
+        const showPromisesButton = document.getElementById('showPromisesButton');
+        const promises = document.getElementById('promises');
+        const promiseOption = document.getElementById('promiseOption');
+
+        showPromisesButton.addEventListener('click', () => {
+            promises.style.display = 'block';
+            showPromisesButton.style.display = 'none';
+        });
+
+        // Slider functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.promise-slide');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            // Show promise option after the last slide
+            if (index === slides.length - 1) {
+                promiseOption.style.display = 'block';
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Show confirmation message before redirecting
+        function showConfirmation() {
+            const confirmationMessage = document.getElementById('confirmationMessage');
+            confirmationMessage.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'https://wa.me/8010906891'; // Replace with your WhatsApp number
+            }, 3000);
+        }
+
+        // Show cute response after clicking "No"
+        function showNoResponse() {
+            const noResponse = document.getElementById('noResponse');
+            noResponse.style.display = 'block';
+            setTimeout(() => {
+                noResponse.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
