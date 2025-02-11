@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love 💖🤗</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+            text-align: center;
+            flex-direction: column;
+            position: relative;
+            margin: 0;
+        }
+        .container {
+            position: relative;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hug-text {
+            font-size: 2.8rem;
+            color: #ff477e;
+            font-weight: bold;
+            animation: bounce 1.5s infinite alternate;
+        }
+        .hug-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            cursor: pointer;
+            display: none;
+        }
+        .hug-container img {
+            width: 100%;
+            border-radius: 20px;
+            animation: hug 1.5s infinite alternate ease-in-out;
+        }
+        @keyframes hug {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .surprise-box {
+            width: 130px;
+            height: 130px;
+            background: #ff477e;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            position: relative;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+        .surprise-box:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .hidden-hug {
+            display: none;
+            font-size: 2.2rem;
+            color: #ff477e;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .heart {
+            position: absolute;
+            font-size: 2.5rem;
+            color: red;
+            animation: floatUp 4s infinite ease-in-out;
+        }
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-150px); }
+        }
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .sparkle {
+            position: absolute;
+            font-size: 1.5rem;
+            color: gold;
+            animation: sparkle 2s infinite ease-in-out;
+        }
+        @keyframes sparkle {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .love-message {
+            display: none;
+            font-size: 2rem;
+            color: #ff477e;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .love-message span {
+            display: inline-block;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .hug-text {
+                font-size: 2rem;
+            }
+            .surprise-box {
+                width: 100px;
+                height: 100px;
+                font-size: 2rem;
+            }
+            .hidden-hug {
+                font-size: 1.8rem;
+            }
+            .hug-container {
+                width: 250px;
+                height: 250px;
+            }
+            .love-message {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hug-text {
+                font-size: 1.5rem;
+            }
+            .surprise-box {
+                width: 80px;
+                height: 80px;
+                font-size: 1.5rem;
+            }
+            .hidden-hug {
+                font-size: 1.2rem;
+            }
+            .hug-container {
+                width: 200px;
+                height: 200px;
+            }
+            .love-message {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="hug-text">Tap the Magic Box for a Special Surprise! 🎁💕</p>
+        <div class="surprise-box" onclick="showHug()">🎁</div>
+        <p id="hiddenHug" class="hidden-hug">Ta-da! Here’s the warmest hug just for you! 🤗💖</p>
+        <div class="hug-container" id="hugContainer">
+            <img src="puuung-kiss-my-sonic-goober.gif" alt="Hug Animation">
+        </div>
+        <p id="loveMessage" class="love-message">
+            <span>I</span> <span>💖</span> <span>You</span> <span>So</span> <span>Much!</span>
+        </p>
+    </div>
+    <div class="floating-hearts" id="heartContainer"></div>
+    <div class="sparkles" id="sparkleContainer"></div>
+    <script>
+        function showHug() {
+            document.getElementById('hiddenHug').style.display = 'block';
+            document.getElementById('hugContainer').style.display = 'block';
+            document.getElementById('loveMessage').style.display = 'block';
+            createFloatingHearts();
+            createSparkles();
+            playSound();
+        }
+        function createFloatingHearts() {
+            const heartContainer = document.getElementById('heartContainer');
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (2 + Math.random() * 3) + 's';
+                heart.innerHTML = '💖';
+                heartContainer.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 4000);
+            }
+        }
+        function createSparkles() {
+            const sparkleContainer = document.getElementById('sparkleContainer');
+            for (let i = 0; i < 30; i++) {
+                let sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + 'vw';
+                sparkle.style.top = Math.random() * 100 + 'vh';
+                sparkle.style.animationDuration = (1 + Math.random() * 2) + 's';
+                sparkle.innerHTML = '✨';
+                sparkleContainer.appendChild(sparkle);
+                setTimeout(() => { sparkle.remove(); }, 2000);
+            }
+        }
+        function playSound() {
+            const audio = new Audio('romantic_ringtone.mp3'); // Add a cute sound effect
+            audio.play();
+        }
+    </script>
+</body>
+</html>
