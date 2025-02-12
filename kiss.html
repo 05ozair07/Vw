@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiss Day Surprise for My Cookie 💋</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle, #ff758c, #ff7eb3);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .heart, .star, .sparkle {
+            position: absolute;
+            color: #ff4e50;
+            font-size: 25px;
+            animation: float 4s linear infinite;
+        }
+
+        .star {
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .sparkle {
+            color: #ffeb3b;
+            font-size: 15px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-200px); opacity: 0; }
+        }
+
+        h1 {
+            font-size: clamp(22px, 6vw, 28px); /* Responsive font size */
+            font-family: 'Pacifico', cursive;
+            color: #fff;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+            margin: 10px;
+        }
+
+        p {
+            font-size: clamp(16px, 4vw, 18px); /* Responsive font size */
+            color: white;
+            opacity: 0.9;
+            margin: 10px;
+        }
+
+        .kiss-btn {
+            background: #ff4e50;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: clamp(16px, 5vw, 20px); /* Responsive font size */
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .kiss-btn:hover {
+            background: #ff6f61;
+            transform: scale(1.1);
+        }
+
+        .love-meter {
+            width: 80%; /* Responsive width */
+            max-width: 300px;
+            height: 30px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-bar {
+            height: 100%;
+            width: 0;
+            background: #ff4e50;
+            border-radius: 15px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .gift-box {
+            width: 80px; /* Fixed size for small screens */
+            height: 80px;
+            background: red;
+            border-radius: 10px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+            margin: 20px auto;
+        }
+
+        .gift-box::before {
+            content: "🎁";
+            font-size: 40px; /* Adjusted for smaller screens */
+            position: absolute;
+        }
+
+        .message-container {
+            display: none;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            padding: 20px;
+            border-radius: 15px;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            margin-top: 15px;
+            width: 90%; /* Responsive width */
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .message-container h2 {
+            position: relative;
+            z-index: 2;
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(20px, 6vw, 24px); /* Responsive font size */
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-container p {
+            position: relative;
+            z-index: 2;
+            font-size: clamp(14px, 4vw, 16px); /* Responsive font size */
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-container img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .kiss-message {
+            font-size: clamp(16px, 5vw, 20px); /* Responsive font size */
+            color: white;
+            background: linear-gradient(135deg, #ff6f61, #ff4e50);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #ff4e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .music-btn:hover {
+            background: #ff6f61;
+        }
+
+        @media (max-width: 600px) {
+            .gift-box {
+                width: 60px; /* Smaller for mobile */
+                height: 60px;
+            }
+
+            .gift-box::before {
+                font-size: 30px; /* Smaller for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>💋 Sweet Kisses for My Kuchipu! 💋</h1>
+    <p>Shower me with kisses and make my heart dance! 😘💖</p>
+    <button class="kiss-btn" id="kissButton">💞 Kiss Attack! 💞</button>
+    <div class="kiss-message" id="kissMessage">🥰 Catching all your kisses, my love! 💕💋</div>
+    <div class="love-meter">
+        <div class="love-bar" id="loveBar"></div>
+    </div>
+    <div class="gift-box" id="giftBox"></div>
+    <div class="message-container" id="messageContainer">
+        <h2>My Forever Love 💞</h2>
+        <p>You are my sweetest dream come true! Every kiss I send is a little piece of my heart just for you! 💋✨</p>
+        <img src="peach-and-goma.gif" alt="Romantic Image">
+    </div>
+    <button class="music-btn" onclick="toggleMusic()">🎶</button>
+    <audio id="bgMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        let kissCount = 0;
+        const maxKisses = 10;
+        let loveBar = document.getElementById('loveBar');
+        let giftBox = document.getElementById('giftBox');
+        let messageContainer = document.getElementById('messageContainer');
+        let kissMessage = document.getElementById('kissMessage');
+
+        const messages = [
+            "😘 A million kisses just for you, my Cookie!",
+            "💋 Smooches for my cutest lovebug!",
+            "💖 You're the sweetest part of my heart!",
+            "💕 Holding you in my heart, always & forever!",
+            "💘 One more kiss, sealed with all my love!",
+            "🌸 You're my little piece of heaven!",
+            "🎀 Wrapped in your love like the softest hug!",
+            "💞 Every heartbeat whispers your name, my love!",
+            "💓 My Cookie, my love, my forever!",
+            "💌 Endless kisses for my perfect princess!"
+        ];
+
+        function createFloatingElement(emoji, className) {
+            let element = document.createElement('span');
+            element.innerHTML = emoji;
+            element.classList.add(className);
+            element.style.left = Math.random() * window.innerWidth + 'px';
+            element.style.top = window.innerHeight + 'px';
+            document.body.appendChild(element);
+            setTimeout(() => element.remove(), 3000);
+        }
+
+        document.getElementById('kissButton').addEventListener('click', function () {
+            kissCount++;
+            let progress = (kissCount / maxKisses) * 100;
+            loveBar.style.width = progress + "%";
+
+            kissMessage.innerText = messages[kissCount % messages.length];
+            kissMessage.style.opacity = 1;
+            setTimeout(() => { kissMessage.style.opacity = 0; }, 2000);
+
+            createFloatingElement("💋", "heart");
+            createFloatingElement("⭐", "star");
+            createFloatingElement("✨", "sparkle");
+
+            if (kissCount >= maxKisses) {
+                giftBox.style.display = "flex";
+            }
+        });
+
+        giftBox.addEventListener('click', function () {
+            messageContainer.style.display = "block";
+            giftBox.style.display = "none";
+        });
+
+        function toggleMusic() {
+            let music = document.getElementById('bgMusic');
+            music.paused ? music.play() : music.pause();
+        }
+
+        // Add initial floating elements for a cute effect
+        setInterval(() => {
+            createFloatingElement("💋", "heart");
+            createFloatingElement("⭐", "star");
+            createFloatingElement("✨", "sparkle");
+        }, 1000);
+    </script>
+</body>
+</html>
