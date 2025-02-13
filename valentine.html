@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Love Story 💖</title>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff6f61, #ffcccb);
+      color: white;
+      overflow-x: hidden;
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="red" d="M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z"/></svg>'), auto;
+    }
+
+    .container {
+      text-align: center;
+      padding: 50px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Timeline of Memories */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 40px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: white;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .timeline-item {
+      padding: 20px 40px;
+      position: relative;
+      width: 50%;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .timeline-item.left {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-item.right {
+      left: 50%;
+      text-align: left;
+    }
+
+    .timeline-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #ff3b2f;
+    }
+
+    .timeline-item p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+
+    .timeline-item img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 10px;
+      margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .timeline-item img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Love Letter Popup */
+    .love-letter-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(255, 255, 255, 0.95);
+      color: #ff6f61;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 90%;
+      text-align: left;
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      z-index: 1000;
+    }
+
+    .love-letter-popup.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .love-letter-popup h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .love-letter-popup p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .love-letter-popup button {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #ff6f61;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .love-letter-popup button:hover {
+      background: #ff3b2f;
+    }
+
+    /* Show Love Letter Button */
+    .show-love-letter-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 5px;
+      background: #ff6f61;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 1000;
+    }
+
+    .show-love-letter-btn.active {
+      opacity: 1;
+    }
+
+    /* Video Section */
+    .video-section {
+      margin: 50px 0;
+    }
+
+    .video-section video {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Confetti Animation (Optimized) */
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      display: none;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: red;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      animation: fall 2s linear infinite;
+    }
+
+    
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding: 20px;
+        text-align: left !important;
+        left: 0 !important;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item img {
+        max-width: 150px;
+      }
+      .surprise h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .timeline-item img {
+        max-width: 120px;
+      }
+      .surprise h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Our Love Story 💖</h1>
+
+    <!-- Timeline of Memories -->
+    <div class="timeline">
+      <div class="timeline-item left">
+        <h2>Our First Meet 💕</h2>
+        <p>Do you remember the day our eyes first met? It felt like the universe paused for a moment...whispering that you were meant to be my forever. From that instant, I knew you were the magic my heart had been waiting for💖.</p>
+        <img src="1a.jpg" alt="First Meet">
+      </div>
+      <div class="timeline-item right">
+        <h2>Our First Date 🌹</h2>
+        <p>The warmth of that cozy car vibe, the sparkle in your eyes, and the melody of your laughter every moment felt like a beautiful dream. That day, my heart knew it had found its favorite place......you❤️.</p>
+        <img src="21.jpg" alt="First Date">
+      </div>
+      <div class="timeline-item left">
+        <h2>Our First Trip 🚗</h2>
+        <p>Wandering through new places with you felt like living in a fairytale. Every road we took, every sunset we watched each moment was magical because I had you by my side. With you, every journey feels like home❤️.</p>
+        <img src="3a.jpg" alt="First Trip">
+      </div>
+    </div>
+
+    <!-- Video Section -->
+     <div class="surprise" id="surprise">
+      <h1>Will You Be My Valentine? 💍</h1>
+    <div class="video-section">
+      <video id="loveVideo" controls>
+        <source src="tttt.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Show Love Letter Button -->
+    <button class="show-love-letter-btn" id="showLoveLetterBtn">Read My Love Letter 💌</button>
+
+    <!-- Love Letter Popup -->
+    <div class="love-letter-popup" id="loveLetterPopup">
+      <h2>To My Forever Valentine 💖</h2>
+      <p>My Dearest Cookie,</p>
+      <p>From the moment our paths crossed, my world became brighter, my heart fuller, and my soul happier. Your laughter is my favorite melody, your kindness my greatest treasure, and your love the most beautiful gift life has given me.</p>
+      <p>Every moment with you.....our first date....our late-night talks....our shared dreams has been nothing short of magic. You are my best friend, my love, my forever.</p>
+      <p>So today, I ask you with all my heart will you be my Valentine, not just for today, but for always?</p>
+      <p>With all my love,</p>
+      <p>Your's Ozzu</p>
+      <button onclick="closeLoveLetter()">Close</button>
+    </div>
+
+    <!-- Confetti Animation -->
+    <div class="confetti" id="confetti"></div>
+  </div>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="your-music.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Animate timeline items on scroll
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    timelineItems.forEach(item => observer.observe(item));
+
+    // Show Love Letter Button when video ends
+    const loveVideo = document.getElementById('loveVideo');
+    const showLoveLetterBtn = document.getElementById('showLoveLetterBtn');
+
+    loveVideo.addEventListener('ended', () => {
+      showLoveLetterBtn.classList.add('active');
+    });
+
+    // Love Letter Popup
+    const loveLetterPopup = document.getElementById('loveLetterPopup');
+
+    showLoveLetterBtn.addEventListener('click', () => {
+      loveLetterPopup.classList.add('active');
+    });
+
+    function closeLoveLetter() {
+      loveLetterPopup.classList.remove('active');
+    }
+
+    // Optimized Confetti Explosion
+    const confettiContainer = document.getElementById('confetti');
+
+    function createConfetti() {
+      const confettiPiece = document.createElement('div');
+      confettiPiece.classList.add('confetti-piece');
+      confettiPiece.style.left = `${Math.random() * 100}vw`;
+      confettiPiece.style.animationDelay = `${Math.random() * 2}s`;
+      confettiContainer.appendChild(confettiPiece);
+
+      // Remove confetti piece after animation ends
+      setTimeout(() => {
+        confettiPiece.remove();
+      }, 2000);
+    }
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY + window.innerHeight >= document.body.offsetHeight) {
+        confettiContainer.style.display = 'block';
+        for (let i = 0; i < 50; i++) { // Reduced number of confetti pieces for better performance
+          createConfetti();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
